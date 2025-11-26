@@ -110,12 +110,14 @@ const reels = [
     isFollowed: true,
   },
 ];
+const reelSection = document.querySelector(".reels-section");
+function allData() {
+  let addData = "";
 
-let addData = "";
-reels.forEach(function (data) {
-  addData =
-    addData +
-    `<div class="reels">
+  reels.forEach(function (data, idx) {
+    addData =
+      addData +
+      `<div class="reels">
     <video class="main-video" src="${data.video}" autoplay loop muted></video>
           <div class="bottom-info">
             <div class="user">
@@ -124,12 +126,14 @@ reels.forEach(function (data) {
                 alt=""
               />
               <h4>${data.userName}</h4>
-              <button>${data.isFollowed ? "Unfollow" : "Follow"}</button>
+              <button id="${idx}" class="follow">${
+        data.isFollowed ? "Unfollow" : "Follow"
+      }</button>
             </div>
             <h2>${data.caption}</h2>
           </div>
           <div class="right-info">
-            <div class="icon-box like-icon">
+            <div id="${idx}" class="like-icon">
               ${
                 data.isLiked
                   ? '<i class="ri-heart-3-fill love"></i>'
@@ -137,20 +141,43 @@ reels.forEach(function (data) {
               }
               <p>${data.likeCount}</p>
             </div>
-            <div class="icon-box comment-icon">
+            <div class="comment-icon">
               <i class="ri-chat-ai-3-line"></i>
               <p>${data.commentCount}</p>
             </div>
-            <div class="icon-box share-icon">
+            <div class="share-icon">
               <i class="ri-share-forward-line"></i>
               <p>${data.shareCount}</p>
             </div>
-            <div class="icon-box menu-icon">
+            <div class="menu-icon">
               <i class="ri-more-2-fill"></i>
             </div>
           </div>
         </div>`;
-});
+  });
 
-const reelSection = document.querySelector(".reels-section");
-reelSection.innerHTML = addData;
+  reelSection.innerHTML = addData;
+}
+
+allData();
+reelSection.addEventListener("click", function (dets) {
+  if (dets.target.className == "like-icon") {
+    if (!reels[dets.target.id].isLiked) {
+      reels[dets.target.id].likeCount++;
+      reels[dets.target.id].isLiked = true;
+    } else {
+      reels[dets.target.id].likeCount--;
+      reels[dets.target.id].isLiked = false;
+    }
+    allData();
+  }
+
+  if (dets.target.className == "follow") {
+    if (!reels[dets.target.id].isFollowed) {
+      reels[dets.target.id].isFollowed = true;
+    } else {
+      reels[dets.target.id].isFollowed = false;
+    }
+    allData();
+  }
+});

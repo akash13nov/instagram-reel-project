@@ -96,18 +96,29 @@ body {
 .right-info .like-icon .love {
   color: red;
 }
-.right-info .icon-box {
+.right-info .like-icon,
+.right-info .comment-icon,
+.right-info .share-icon,
+.right-info .menu-icon {
   font-size: 18px;
   color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
-}
-.right-info .icon-box p {
-  font-weight: 500;
-}
-.right-info .icon-box i {
-  font-size: 30px;
   cursor: pointer;
+}
+.right-info .like-icon p,
+.right-info .comment-icon p,
+.right-info .share-icon p,
+.right-info .menu-icon p {
+  font-weight: 500;
+  pointer-events: none;
+}
+.right-info .like-icon i,
+.right-info .comment-icon i,
+.right-info .share-icon i,
+.right-info .menu-icon i {
+  font-size: 30px;
+  pointer-events: none;
 }
